@@ -9,6 +9,9 @@ class IInsuranceDataAccess:
     def load_from_csv(self, filepath):
         raise NotImplementedError
 
+    def get_all(self):
+        raise NotImplementedError
+
 class CSVAndDBAccess(IInsuranceDataAccess):
     def __init__(self, session):
         self.session = session
@@ -49,6 +52,13 @@ class CSVAndDBAccess(IInsuranceDataAccess):
         if not items:
             print("No valid products to save.")
             return
-        self.session.add_all(items)
-        self.session.commit()
-        print(f"{len(items)} products saved to the database ✅")
+        try:
+            self.session.add_all(items)
+            self.session.commit()
+            print(f"{len(items)} products saved to the database")
+        except Exception as e:
+            self.session.rollback()
+            print(f"Error saving products: {e}")
+
+    def get_all(self):
+        return self.session.query(InsuranceProduct).all()

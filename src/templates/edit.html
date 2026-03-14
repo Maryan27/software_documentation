@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Insurance Product</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Insurance Product</h1>
+        <form method="POST">
+            <label for="client_name">Client Name:</label>
+            <input type="text" id="client_name" name="client_name" value="{{ product.client_name }}" required>
+
+            <label for="client_email">Client Email:</label>
+            <input type="email" id="client_email" name="client_email" value="{{ product.client_email }}" required>
+
+            <label for="policy_number">Policy Number:</label>
+            <input type="text" id="policy_number" name="policy_number" value="{{ product.policy_number }}" required>
+
+            <label for="insurance_type">Insurance Type:</label>
+            <select id="insurance_type" name="insurance_type" required>
+                {% set types = ['Health', 'Life', 'Property', 'Vehicle', 'Travel'] %}
+                {% for t in types %}
+                    <option value="{{ t }}" {% if t == product.insurance_type %}selected{% endif %}>{{ t }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" value="{{ product.amount }}" required>
+
+            <label for="company_name">Company Name:</label>
+            <input type="text" id="company_name" name="company_name" value="{{ product.company_name }}">
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ product.start_date }}">
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>
