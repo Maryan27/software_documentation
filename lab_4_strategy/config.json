@@ -1,0 +1,4 @@
+{
+  "output_strategy": "redis",
+  "csv_file_path": "Dallas_Police_Incidents_s.csv"
+}

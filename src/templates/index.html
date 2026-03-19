@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insurance Products</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container index">
+        <h1>Insurance Products</h1>
+        <a href="{{ url_for('add') }}" class="add-button">Add New Product</a>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Client Name</th>
+                <th>Email</th>
+                <th>Policy Number</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Company</th>
+                <th>Start Date</th>
+                <th>Actions</th>
+            </tr>
+            {% for p in products %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.client_name }}</td>
+                <td>{{ p.client_email }}</td>
+                <td>{{ p.policy_number }}</td>
+                <td>{{ p.insurance_type }}</td>
+                <td>{{ p.amount }}</td>
+                <td>{{ p.company_name }}</td>
+                <td>{{ p.start_date }}</td>
+                <td>
+                    <a href="{{ url_for('edit', id=p.id) }}" class="edit">Edit</a> | 
+                    <a href="{{ url_for('delete', id=p.id) }}" class="delete" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
